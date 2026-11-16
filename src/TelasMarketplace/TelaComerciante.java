@@ -44,6 +44,7 @@ public class TelaComerciante extends javax.swing.JFrame {
         btnBuscarNome = new javax.swing.JButton();
         btnBuscarPreco = new javax.swing.JButton();
         btnBuscarCategoria = new javax.swing.JButton();
+        btnOffSaleProduto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,14 +53,14 @@ public class TelaComerciante extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Produto", "Preço", "Avaliação", "Categoria", "Promoão"
+                "Produto", "Preço", "Avaliação", "Categoria", "Promoão", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -78,6 +79,7 @@ public class TelaComerciante extends javax.swing.JFrame {
             tblComerciante.getColumnModel().getColumn(2).setResizable(false);
             tblComerciante.getColumnModel().getColumn(3).setResizable(false);
             tblComerciante.getColumnModel().getColumn(4).setResizable(false);
+            tblComerciante.getColumnModel().getColumn(5).setResizable(false);
         }
 
         labelUsuario.setText("Nome Usuario");
@@ -173,6 +175,13 @@ public class TelaComerciante extends javax.swing.JFrame {
             }
         });
 
+        btnOffSaleProduto.setText("Tirar do Marketplace");
+        btnOffSaleProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOffSaleProdutoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,7 +198,8 @@ public class TelaComerciante extends javax.swing.JFrame {
                         .addComponent(btnLogout))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVerProduto)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnOffSaleProduto))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBuscarNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -247,7 +257,9 @@ public class TelaComerciante extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addComponent(btnVerProduto)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVerProduto)
+                    .addComponent(btnOffSaleProduto))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -306,6 +318,10 @@ public class TelaComerciante extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarCategoriaActionPerformed
 
+    private void btnOffSaleProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOffSaleProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnOffSaleProdutoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -347,6 +363,7 @@ public class TelaComerciante extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarPreco;
     private javax.swing.JButton btnExcluirProduto;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnOffSaleProduto;
     private javax.swing.JButton btnPromocaoProduto;
     private javax.swing.JButton btnRegistrarProduto;
     private javax.swing.JButton btnVerMarketplace;

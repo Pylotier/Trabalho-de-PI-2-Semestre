@@ -1,13 +1,14 @@
 package ClassesMarketplace;
 
-import Interfaces.InterAcesso;
-
-public class ClassCliente extends ClassIndividuo implements InterAcesso{
+public class ClassCliente {
     private String CPF;
+    
+    private int individuo_Registro;
 
-    public ClassCliente() {
+    ClassCliente(){
+        this.CPF = "";
     }
-
+    
     public String getCPF() {
         return CPF;
     }
@@ -16,14 +17,12 @@ public class ClassCliente extends ClassIndividuo implements InterAcesso{
         this.CPF = CPF;
     }
 
-    @Override
-    public void logIn(String usuario, String senha) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int getIndividuo_Registro() {
+        return individuo_Registro;
     }
 
-    @Override
-    public void logOff() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void setIndividuo_Registro(int individuo_Registro) {
+        this.individuo_Registro = individuo_Registro;
     }
     
 }

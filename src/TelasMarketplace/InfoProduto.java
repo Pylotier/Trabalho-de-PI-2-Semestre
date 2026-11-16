@@ -45,6 +45,7 @@ public class InfoProduto extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        btnSelecionarProduto1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +86,9 @@ public class InfoProduto extends javax.swing.JFrame {
 
         jLabel12.setText("X");
 
+        btnSelecionarProduto1.setText("Avaliar");
+        btnSelecionarProduto1.addActionListener(this::btnSelecionarProduto1ActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,7 +103,9 @@ public class InfoProduto extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(191, 191, 191))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSelecionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSelecionarProduto)
+                                .addGap(30, 30, 30)
+                                .addComponent(btnSelecionarProduto1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(14, 14, 14))))
@@ -163,7 +169,8 @@ public class InfoProduto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSelecionarProduto)
-                    .addComponent(btnVoltar))
+                    .addComponent(btnVoltar)
+                    .addComponent(btnSelecionarProduto1))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -177,6 +184,10 @@ public class InfoProduto extends javax.swing.JFrame {
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnSelecionarProduto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarProduto1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSelecionarProduto1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,6 +216,7 @@ public class InfoProduto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSelecionarProduto;
+    private javax.swing.JButton btnSelecionarProduto1;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

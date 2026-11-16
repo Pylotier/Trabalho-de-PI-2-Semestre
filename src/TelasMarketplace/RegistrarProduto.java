@@ -41,8 +41,6 @@ public class RegistrarProduto extends javax.swing.JFrame {
         txtLogradouro = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtNumero = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        txtCidade = new javax.swing.JTextField();
         txtRegistrar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
@@ -66,8 +64,6 @@ public class RegistrarProduto extends javax.swing.JFrame {
         jLabel6.setText("Logradouro:");
 
         jLabel7.setText("Número:");
-
-        jLabel8.setText("Cidade:");
 
         txtRegistrar.setText("Registrar");
 
@@ -108,10 +104,6 @@ public class RegistrarProduto extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtCidade))
-                                .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel7)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtNumero))
@@ -147,10 +139,7 @@ public class RegistrarProduto extends javax.swing.JFrame {
                     .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                .addComponent(jLabel4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(81, 81, 81)
@@ -160,7 +149,7 @@ public class RegistrarProduto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -210,11 +199,9 @@ public class RegistrarProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea tblDescricao;
     private javax.swing.JTextField txtCEP;
-    private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtLogradouro;
     private javax.swing.JTextField txtNomeProduto;
     private javax.swing.JTextField txtNumero;

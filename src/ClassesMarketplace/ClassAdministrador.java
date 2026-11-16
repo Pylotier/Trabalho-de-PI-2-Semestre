@@ -3,18 +3,27 @@ package ClassesMarketplace;
 import Interfaces.InterAcesso;
 import Interfaces.InterGerenciarProduto;
 
-public class ClassAdministrador implements InterAcesso, InterGerenciarProduto{
+public class ClassAdministrador extends ClassIndividuo{
+    private int individuo_Registro;
     private String ususario;
-    private String senha;
-
+    
+    public ClassAdministrador() {
+        this.individuo_Registro = 0;
+        this.ususario = "";
+    }
+    
     public ClassAdministrador(String ususario, String senha) {
         this.ususario = ususario;
-        this.senha = senha;
     }
 
-    public ClassAdministrador() {
+    public int getIndividuo_Registro() {
+        return individuo_Registro;
     }
 
+    public void setIndividuo_Registro(int Individuo_Registro) {
+        this.individuo_Registro = Individuo_Registro;
+    }
+    
     public String getUsusario() {
         return ususario;
     }
@@ -22,53 +31,5 @@ public class ClassAdministrador implements InterAcesso, InterGerenciarProduto{
     public void setUsusario(String ususario) {
         this.ususario = ususario;
     }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    // ACESSO
-    @Override
-    public void logIn(String usuario, String senha) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void logOff() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    
-    // OPERAÇÕES DE GERENCIAR PRODUTO
-    @Override
-    public void RegistrarProduto(String nome, double preco, String descricao, int qtde) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void AplicarPromocao() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ClassProduto AtualizarProtudo(String nome, double preco, String descricao, int qtde) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void ExcluirProduto(int Id, String nomeComerciante) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void OffSaleProduto(int Id, String nomeComerciante) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-    
 
 }
