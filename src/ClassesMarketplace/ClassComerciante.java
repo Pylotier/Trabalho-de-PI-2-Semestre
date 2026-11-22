@@ -1,13 +1,13 @@
 package ClassesMarketplace;
 
 import DAO.GenericDAO;
-import Interfaces.InterAcesso;
 import Interfaces.InterGerenciarProduto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ClassComerciante extends ClassIndividuo implements InterAcesso, InterGerenciarProduto{
+public class ClassComerciante extends ClassIndividuo implements InterGerenciarProduto{
     private int individuoID_Registro;
     private String CNPJ;
     private String telefone;
@@ -54,12 +54,48 @@ public class ClassComerciante extends ClassIndividuo implements InterAcesso, Int
 
     // ACESSO
     @Override
-    public void logIn(String usuario, String senha) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int logIn(String usuario, String senha) {
+        try {
+            GenericDAO gDao = new GenericDAO();
+            Connection conn = gDao.getConnection();
+            String sql = "SELECT ID_Registro, senha FROM Individuo WHERE Individuo.Email = ?";
+            //String sql = "SELECT ID_Registro, senha FROM Individuo INNER JOIN Comerciante " +
+            //" ON Individuo.ID_Registro = Comerciante.IndividuoID_Registro " +
+            //" WHERE Individuo.Email = ?' AND Comerciante.CNPJ = ?";
+            
+            PreparedStatement psLogin = conn.prepareStatement(sql);
+            psLogin.setString(1, usuario);
+                
+            try (ResultSet rs = psLogin.executeQuery()){
+                if (rs.next()){
+                    String senhaBanco = rs.getString("Senha");
+
+                    if (senhaBanco.equals(senha)){
+                        return rs.getInt("ID_Registro");
+                    }
+                }
+            }                       
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ClassComerciante.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(ClassComerciante.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
+        return 0; 
     }
 
     @Override
     public void logOff() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    @Override
+    public void iniciarSessao(int id) {
+        this.individuoID_Registro = id;
+    }
+
+    @Override
+    public void encerrarSecao() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
@@ -76,11 +112,6 @@ public class ClassComerciante extends ClassIndividuo implements InterAcesso, Int
     }
 
     @Override
-    public ClassProduto AtualizarProtudo(String nome, double preco, String descricao, int qtde) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public void ExcluirProduto(int Id, String nomeComerciante) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -90,28 +121,55 @@ public class ClassComerciante extends ClassIndividuo implements InterAcesso, Int
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    public void insertUsuario(ClassComerciante cc) throws ClassNotFoundException, SQLException{
+    public int insertUsuario(ClassComerciante cm) throws ClassNotFoundException, SQLException{
         GenericDAO gDao = new GenericDAO();
+        ClassCarrinho cr = new ClassCarrinho();
         Connection conn = gDao.getConnection();
-        String sql = "INSERT INTO Individuo (Email, Senha) VALUES (?,?)";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        //ps.setInt(1, ci.getId());
-        ps.setString(1, cc.getEmail());
-        ps.setString(2, cc.getSenha());
-        //ps.setInt(4, ci.getEstadoConta());
-        ps.execute();
         
-        sql = "INSERT INTO Comerciante (IndividuoID_Registro, Nome, CNPJ, Telefone) VALUES (?,?,?,?)";
-        ps = conn.prepareStatement(sql);
+        // INSERT em individuo
+        String sqlIndividuo = "INSERT INTO Individuo (Email, Senha) VALUES (?,?)";
+        PreparedStatement psIndiv = conn.prepareStatement(sqlIndividuo);
+        psIndiv.setString(1, cm.getEmail());
+        psIndiv.setString(2, cm.getSenha());
+        psIndiv.execute();
+        psIndiv.close();
         
-        //ps.setInt(1, ci.getId());
-        ps.setString(1, cc.getNomeComerciante());
-        ps.setString(2, cc.getCNPJ());
-        ps.setString(3, cc.getTelefone());
-        //ps.setInt(4, ci.getEstadoConta());
         
-        ps.close();
+        // Retorna o ID_Individuo recentimento criado
+        String retornoIdIndividuo = "SELECT indi.ID_Registro FROM Individuo AS indi WHERE indi.Email = ?";
+        PreparedStatement psRetornaID = conn.prepareStatement(retornoIdIndividuo);
+        psRetornaID.setString(1, cm.getEmail());
+        
+        ResultSet rs = psRetornaID.executeQuery();
+        
+        if (rs.next()) {
+            cm.setIndividuoID_Registro(rs.getInt("ID_Registro"));
+            System.out.print(cm.getIndividuoID_Registro());
+        }
+
+        rs.close();
+        psRetornaID.close();
+        
+        // Cria o Cliente
+        String sqlCliente = "INSERT INTO Comerciante (IndividuoID_Registro, Nome, CNPJ, Telefone) VALUES (?,?,?,?)";
+        PreparedStatement psComerciante = conn.prepareStatement(sqlCliente);
+        psComerciante.setInt(1, cm.getIndividuoID_Registro());
+        psComerciante.setString(2, cm.getNomeComerciante());
+        psComerciante.setString(3, cm.getCNPJ());
+        psComerciante.setString(4, cm.getTelefone());
+        psComerciante.execute();
+        psComerciante.close();
+        
+        // Cria o carrinho pertecendo ao Cliente
         conn.close();
+        
+        return cm.getIndividuoID_Registro();
     }
+
+    @Override
+    public void AtualizarProtudo(ClassProduto cp, ClassEnderecoProduto cend, int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }   
    

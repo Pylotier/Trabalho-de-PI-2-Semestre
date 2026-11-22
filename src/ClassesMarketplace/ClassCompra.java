@@ -1,6 +1,6 @@
 package ClassesMarketplace;
 
-public class ClassCompra {
+public class ClassCompra{
     private int ID_Compra;
     private String dataCompra;
     private float valorTotal;

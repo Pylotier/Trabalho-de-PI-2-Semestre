@@ -1,5 +1,12 @@
 package ClassesMarketplace;
 // Usado tanto para os endereços de entrga quanto para estoque
+
+import DAO.GenericDAO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class ClassEnderecoProduto {
     private int ID;
     private String logradouro;
@@ -55,4 +62,39 @@ public class ClassEnderecoProduto {
         this.complemento = complemento;
     } 
     
+    public int insertEnderecoProduto(ClassEnderecoProduto cend) throws ClassNotFoundException, SQLException {
+        GenericDAO gDao = new GenericDAO();
+        Connection conn = gDao.getConnection();
+           
+        // INSERT em Produto
+        String sqlProduto = "INSERT INTO EnderecoEstoque (Logradouro, Numero, CEP, Complemento) VALUES (?,?,?,?)";
+        PreparedStatement psProduto = conn.prepareStatement(sqlProduto);
+        psProduto.setString(1, cend.getLogradouro());
+        psProduto.setInt(2, cend.getNumero());
+        psProduto.setString(3, cend.getCEP());
+        psProduto.setInt(4, cend.getNumero());        
+        psProduto.execute();
+        psProduto.close();
+        
+        // Retorna o ID da categoria selecionada
+        String retornoIdIndividuo = "SELECT ende.ID FROM EnderecoEstoque AS ende WHERE ende.Logradouro = ? AND ende.Numero = ?";
+        PreparedStatement psRetornaID = conn.prepareStatement(retornoIdIndividuo);
+        psRetornaID.setString(1, getLogradouro());
+        psRetornaID.setInt(2, getNumero());
+        
+        ResultSet rs = psRetornaID.executeQuery();
+        
+        if (rs.next()) {
+            cend.setID(rs.getInt("ID"));
+            System.out.print(getID());
+        }
+
+        rs.close();
+        psRetornaID.close();
+     
+
+        conn.close();
+        
+        return getID();
+    }
 }

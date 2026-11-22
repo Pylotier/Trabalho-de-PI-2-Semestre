@@ -1,5 +1,12 @@
 package ClassesMarketplace;
 // Usado tanto para os endereços de entrga quanto para estoque
+
+import DAO.GenericDAO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class ClassEnderecoEntrega {
     private int CompraID;
     
@@ -54,6 +61,5 @@ public class ClassEnderecoEntrega {
 
     public void setComplemento(String complemento) {
         this.complemento = complemento;
-    } 
-    
+    }
 }

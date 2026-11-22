@@ -66,7 +66,7 @@ public class InfoProduto extends javax.swing.JFrame {
         txtaDescricao.setRows(5);
         jScrollPane1.setViewportView(txtaDescricao);
 
-        btnSelecionarProduto.setText("Selecionar Produto");
+        btnSelecionarProduto.setText("Colocar no Carrinho");
         btnSelecionarProduto.addActionListener(this::btnSelecionarProdutoActionPerformed);
 
         jLabel15.setText("Descrição:");

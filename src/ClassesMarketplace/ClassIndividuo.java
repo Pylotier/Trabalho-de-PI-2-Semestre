@@ -5,9 +5,10 @@ import Interfaces.InterAcesso;
 import Interfaces.InterCadastroUsuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ClassIndividuo implements InterAcesso, InterCadastroUsuario{
+public abstract class ClassIndividuo implements InterAcesso{
     private int ID_Registro;
     private String email;
     private String senha;
@@ -52,29 +53,4 @@ public class ClassIndividuo implements InterAcesso, InterCadastroUsuario{
         this.estadoConta = estadoConta;
     }
 
-    @Override
-    public void logIn(String usuario, String senha) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void logOff() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void insertUsuario(ClassIndividuo ci) throws ClassNotFoundException, SQLException {
-        GenericDAO gDao = new GenericDAO();
-        Connection conn = gDao.getConnection();
-        String sql = "INSERT INTO Individuo (Email, Senha) VALUES (?,?)";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        //ps.setInt(1, ci.getId());
-        ps.setString(1, ci.getEmail());
-        ps.setString(2, ci.getSenha());
-        //ps.setInt(4, ci.getEstadoConta());
-        ps.execute();
-        ps.close();
-        conn.close();
-    }
- 
-    
 }

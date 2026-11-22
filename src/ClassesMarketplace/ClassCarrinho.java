@@ -30,20 +30,19 @@ public class ClassCarrinho {
         this.individuoID_Registro = individuoID_Registro;
     }
     
-    public void insertCarrinho(ClassCarrinho cr)
+    public void insertCarrinho(int idPessoa)
         throws ClassNotFoundException, SQLException {
 
     GenericDAO gDao = new GenericDAO();
-    ClassIndividuo ci = new ClassIndividuo();
 
-    String sql = "INSERT INTO Carrinho (Cliente_ID, Preco_total) "
+    String sql = "INSERT INTO Carrinho (ClienteID, Preco_total) "
                + "VALUES (?, ?)";
 
     try (Connection conn = gDao.getConnection();
-        PreparedStatement ps = conn.prepareStatement(sql)) {
+         PreparedStatement ps = conn.prepareStatement(sql)) {
 
-        ps.setInt(1, ci.getId());
-        ps.setFloat(2, cr.getPrecoTotal());
+        ps.setInt(1, idPessoa);
+        ps.setFloat(2, getPrecoTotal());
 
         ps.executeUpdate();
     }
