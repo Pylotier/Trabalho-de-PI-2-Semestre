@@ -1,0 +1,46 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="C3TBzCwTUDoppx_38kBv">
+    <mxGraphModel grid="0" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="heIYmDTALOY_SlMjeCAR-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="FrCliente" vertex="1">
+          <mxGeometry height="60" width="120" x="359" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="heIYmDTALOY_SlMjeCAR-7" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="CtrlCliente" vertex="1">
+          <mxGeometry height="90" width="322" x="258" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="heIYmDTALOY_SlMjeCAR-8" parent="heIYmDTALOY_SlMjeCAR-7" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="+cadastrarcliente(email:Email,senha:Senha,cpf:CPF);void" vertex="1">
+          <mxGeometry height="30" width="322" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="heIYmDTALOY_SlMjeCAR-9" parent="heIYmDTALOY_SlMjeCAR-7" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="+logarcliente(email:Email, senha:Senha, cpf:CPF):void" vertex="1">
+          <mxGeometry height="30" width="322" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VU874nOwGX-HsHzF1-0C-1" edge="1" parent="1" source="heIYmDTALOY_SlMjeCAR-7" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="heIYmDTALOY_SlMjeCAR-5" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="320" as="sourcePoint" />
+            <mxPoint x="440" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VU874nOwGX-HsHzF1-0C-2" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Cliente" vertex="1">
+          <mxGeometry height="120" width="140" x="349" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="VU874nOwGX-HsHzF1-0C-3" parent="VU874nOwGX-HsHzF1-0C-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="-Email:str" vertex="1">
+          <mxGeometry height="30" width="140" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VU874nOwGX-HsHzF1-0C-4" parent="VU874nOwGX-HsHzF1-0C-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="-Senha:str" vertex="1">
+          <mxGeometry height="30" width="140" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VU874nOwGX-HsHzF1-0C-5" parent="VU874nOwGX-HsHzF1-0C-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="-CPF:str" vertex="1">
+          <mxGeometry height="30" width="140" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="VU874nOwGX-HsHzF1-0C-6" edge="1" parent="1" source="VU874nOwGX-HsHzF1-0C-2" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.499;entryY=1.04;entryDx=0;entryDy=0;entryPerimeter=0;" target="heIYmDTALOY_SlMjeCAR-9" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="310" as="sourcePoint" />
+            <mxPoint x="440" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
