@@ -337,7 +337,7 @@ public class TelaComerciante extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarCategoriaActionPerformed
 
     private void btnVerMarketplaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerMarketplaceActionPerformed
-        TelaInicial tela = new TelaInicial();
+        TelaInicial tela = new TelaInicial(idSessao);
                 
         tela.setVisible(true);
     }//GEN-LAST:event_btnVerMarketplaceActionPerformed
@@ -351,7 +351,7 @@ public class TelaComerciante extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerProdutoActionPerformed
 
     private void btnRegistrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarProdutoActionPerformed
-        AtualizarProduto tela = new AtualizarProduto();
+        CadastrarProduto tela = new CadastrarProduto(idSessao);
                 
         tela.setVisible(true);
     }//GEN-LAST:event_btnRegistrarProdutoActionPerformed

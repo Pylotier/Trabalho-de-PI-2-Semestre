@@ -305,7 +305,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerProdutoActionPerformed
 
     private void btnRegistrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarProdutoActionPerformed
-        CadastrarProduto tela = new CadastrarProduto();
+        CadastrarProduto tela = new CadastrarProduto(idSessao);
                 
         tela.setVisible(true);
     }//GEN-LAST:event_btnRegistrarProdutoActionPerformed

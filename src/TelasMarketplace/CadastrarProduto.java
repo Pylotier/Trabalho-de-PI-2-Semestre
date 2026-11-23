@@ -243,7 +243,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
             int idEnderecoProduto = cend.insertEnderecoProduto(cend);
 
             cp.setNomeProduto(txtNomeProduto.getText());
-            cp.setPreco(Float.parseFloat(txtPreco.getText()));
+            cp.setPreco(Float.parseFloat(txtPreco.getText())/0.70f);
             cp.setQtdeDisponivel(Integer.parseInt(txtQtde.getText()));
             cp.setDescricao(tblDescricao.getText());
             
@@ -251,7 +251,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(
                 null,
-                "Produto cadastrados com sucesso!\nValor após comissão do Marketplace: " + cp.getPreco()/0.30
+                "Produto cadastrados com sucesso!\nValor após comissão do Marketplace: " + cp.getPreco()
             );
 
         } catch (Exception e) {
