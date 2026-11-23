@@ -21,6 +21,8 @@ public class ClassProduto {
     private int categoriaID;
     private int enderecoProdutoID;
     private int comercianteID;
+    
+    private int produtoSelecionado;
 
     public ClassProduto() {
         this.ID_Produto = 0;
@@ -35,6 +37,15 @@ public class ClassProduto {
         this.enderecoProdutoID = 0;
         
         this.nomeCategoria = "";
+        this.produtoSelecionado = 0;
+    }
+
+    public int getProdutoSelecionado() {
+        return produtoSelecionado;
+    }
+
+    public void setProdutoSelecionado(int produtoSelecionado) {
+        this.produtoSelecionado = produtoSelecionado;
     }
 
     public int getID_Produto() {
@@ -117,7 +128,7 @@ public class ClassProduto {
     }
     
     
-    public void insertProduto(ClassEnderecoProduto cend, int idEnderecoProduto, String valorCategoria) throws ClassNotFoundException, SQLException {
+    public void insertProduto(ClassEnderecoProduto cend, int idEnderecoProduto, String valorCategoria, int idSessao) throws ClassNotFoundException, SQLException {
         GenericDAO gDao = new GenericDAO();
         Connection conn = gDao.getConnection();
         ClassProduto cp = new ClassProduto();
@@ -149,7 +160,7 @@ public class ClassProduto {
         psProduto.setString(4, getDescricao());
         psProduto.setInt(5, cte.getID_Categoria());
         psProduto.setInt(6,idEnderecoProduto);
-        psProduto.setInt(7, /*cm.individuoID_Registro()*/1002); // Login
+        psProduto.setInt(7, idSessao);
         psProduto.execute();
         psProduto.close();
         

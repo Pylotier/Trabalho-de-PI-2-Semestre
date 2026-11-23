@@ -4,11 +4,8 @@
  */
 package TelasMarketplace;
 
-import ClassesMarketplace.ClassCategoria;
 import ClassesMarketplace.ClassEnderecoProduto;
 import ClassesMarketplace.ClassProduto;
-import DAO.GenericDAO;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,12 +13,17 @@ import javax.swing.JOptionPane;
  * @author dti
  */
 public class CadastrarProduto extends javax.swing.JFrame {
-
+    static int idSessao;
     /**
      * Creates new form RegistrarProduto
      */
     public CadastrarProduto() {
         initComponents();
+    }
+    
+    public CadastrarProduto(int idSessao) {
+        initComponents();
+        this.idSessao = idSessao;
     }
 
     /**
@@ -238,7 +240,6 @@ public class CadastrarProduto extends javax.swing.JFrame {
             
             String valorCateogira = txtCategoria.getText();
 
-            // 1. Cadastrar Individuo e Cliente
             int idEnderecoProduto = cend.insertEnderecoProduto(cend);
 
             cp.setNomeProduto(txtNomeProduto.getText());
@@ -246,7 +247,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
             cp.setQtdeDisponivel(Integer.parseInt(txtQtde.getText()));
             cp.setDescricao(tblDescricao.getText());
             
-            cp.insertProduto(cend, idEnderecoProduto, valorCateogira);
+            cp.insertProduto(cend, idEnderecoProduto, valorCateogira, idSessao);
 
             JOptionPane.showMessageDialog(
                 null,

@@ -34,28 +34,25 @@
                           <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnBuscarCategoria2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnCarregarLista" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnVerProduto" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="59" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="labelUsuario" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <Component id="btnOffSaleProduto" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="labelUsuario" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="btnRegistrarProduto" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btnExcluirProduto" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btnAtualizarProduto" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btnPromocaoProduto" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="btnNovaCategoria" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnRegistrarProduto" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnExcluirProduto" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnAtualizarProduto" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -67,7 +64,7 @@
                           <Group type="102" attributes="0">
                               <Component id="btnBuscarCategoria1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnNovaCategoria" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnVerSolicitacao" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="btnBuscarNome" min="-2" max="-2" attributes="0"/>
@@ -90,7 +87,7 @@
                               <Component id="txtBuscarCategoria" min="-2" pref="79" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="101" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -107,7 +104,7 @@
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnBuscarCategoria1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnNovaCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnVerSolicitacao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -128,18 +125,18 @@
               <Component id="jScrollPane1" min="-2" pref="160" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnBuscarCategoria2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCarregarLista" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnRegistrarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAtualizarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnExcluirProduto" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnPromocaoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnNovaCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnOffSaleProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnVerProduto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -271,14 +268,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnPromocaoProduto">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Aplicar Promo&#xe7;&#xe3;o"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPromocaoProdutoActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="text" type="java.lang.String" value="Min"/>
@@ -320,12 +309,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOffSaleProdutoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnBuscarCategoria2">
+    <Component class="javax.swing.JButton" name="btnCarregarLista">
       <Properties>
         <Property name="text" type="java.lang.String" value="Recarregar Tabela"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarCategoria2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCarregarListaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnNovaCategoria">
@@ -342,6 +331,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAtualizarProdutoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnVerSolicitacao">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ver Solicita&#xe7;&#xf5;es"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerSolicitacaoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

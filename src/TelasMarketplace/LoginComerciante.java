@@ -147,7 +147,7 @@ public class LoginComerciante extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
                 System.out.print("id usuario:" + id);
                 
-                TelaComerciante tela = new TelaComerciante();
+                TelaComerciante tela = new TelaComerciante(id);
                 
                 tela.setVisible(true);
                 this.dispose();
@@ -167,7 +167,10 @@ public class LoginComerciante extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
-        // TODO add your handling code here:
+        CadastroComerciante tela = new CadastroComerciante();
+                
+        tela.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed

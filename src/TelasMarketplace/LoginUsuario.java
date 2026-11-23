@@ -147,7 +147,7 @@ public class LoginUsuario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
                 System.out.print("id usuario:" + id);
                 
-                TelaInicial tela = new TelaInicial();
+                TelaInicial tela = new TelaInicial(id);
                 
                 tela.setVisible(true);
                 this.dispose();
@@ -167,7 +167,10 @@ public class LoginUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
-        // TODO add your handling code here:
+        CadastroAdministrador tela = new CadastroAdministrador();
+                
+        tela.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
@@ -175,7 +178,10 @@ public class LoginUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnLoginAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginAdministradorActionPerformed
-        // TODO add your handling code here:
+        CadastroCliente tela = new CadastroCliente();
+                
+        tela.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnLoginAdministradorActionPerformed
 
     /**

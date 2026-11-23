@@ -169,7 +169,10 @@ public class CadastroAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+        LoginAdministrador tela = new LoginAdministrador();
+                
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed

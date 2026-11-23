@@ -29,7 +29,7 @@ public class Historico extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblHistorico = new javax.swing.JTable();
+        tblSelecionarCompra = new javax.swing.JTable();
         btnBuscarNome = new javax.swing.JButton();
         txtBuscarCategoria = new javax.swing.JTextField();
         btnBuscarPreco = new javax.swing.JButton();
@@ -41,22 +41,25 @@ public class Historico extends javax.swing.JFrame {
         txtMaxPreco = new javax.swing.JTextField();
         btnBuscarCategoria = new javax.swing.JButton();
         btnVerProduto = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblItensComprados = new javax.swing.JTable();
+        btnVoltar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tblHistorico.setModel(new javax.swing.table.DefaultTableModel(
+        tblSelecionarCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Produto", "Preço", "Data Pagamento", "Metódo"
+                "ID", "Compra", "Data"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -67,12 +70,11 @@ public class Historico extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblHistorico);
-        if (tblHistorico.getColumnModel().getColumnCount() > 0) {
-            tblHistorico.getColumnModel().getColumn(0).setResizable(false);
-            tblHistorico.getColumnModel().getColumn(1).setResizable(false);
-            tblHistorico.getColumnModel().getColumn(2).setResizable(false);
-            tblHistorico.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane1.setViewportView(tblSelecionarCompra);
+        if (tblSelecionarCompra.getColumnModel().getColumnCount() > 0) {
+            tblSelecionarCompra.getColumnModel().getColumn(0).setResizable(false);
+            tblSelecionarCompra.getColumnModel().getColumn(1).setResizable(false);
+            tblSelecionarCompra.getColumnModel().getColumn(2).setResizable(false);
         }
 
         btnBuscarNome.setText("Buscar por Nome");
@@ -102,14 +104,53 @@ public class Historico extends javax.swing.JFrame {
         btnVerProduto.setText("Detalhes do Produto");
         btnVerProduto.addActionListener(this::btnVerProdutoActionPerformed);
 
+        tblItensComprados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Produto", "Preço", "Data Pagamento", "Metódo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblItensComprados);
+        if (tblItensComprados.getColumnModel().getColumnCount() > 0) {
+            tblItensComprados.getColumnModel().getColumn(0).setResizable(false);
+            tblItensComprados.getColumnModel().getColumn(1).setResizable(false);
+            tblItensComprados.getColumnModel().getColumn(2).setHeaderValue("Data Pagamento");
+            tblItensComprados.getColumnModel().getColumn(3).setResizable(false);
+            tblItensComprados.getColumnModel().getColumn(3).setHeaderValue("Metódo");
+        }
+
+        btnVoltar1.setText("Selecionar Compra");
+        btnVoltar1.addActionListener(this::btnVoltar1ActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnVoltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVerProduto))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -129,13 +170,11 @@ public class Historico extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBuscarCategoria)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 121, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVoltar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVerProduto)))
+                                .addComponent(txtBuscarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnVoltar1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,13 +196,17 @@ public class Historico extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBuscarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarCategoria))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnVoltar1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar)
                     .addComponent(btnVerProduto))
-                .addGap(14, 14, 14))
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -182,7 +225,7 @@ public class Historico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarPrecoActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void txtBuscarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarNomeActionPerformed
@@ -204,6 +247,10 @@ public class Historico extends javax.swing.JFrame {
     private void btnVerProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProdutoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVerProdutoActionPerformed
+
+    private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVoltar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,10 +283,13 @@ public class Historico extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarPreco;
     private javax.swing.JButton btnVerProduto;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JButton btnVoltar1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblHistorico;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblItensComprados;
+    private javax.swing.JTable tblSelecionarCompra;
     private javax.swing.JTextField txtBuscarCategoria;
     private javax.swing.JTextField txtBuscarNome;
     private javax.swing.JTextField txtMaxPreco;

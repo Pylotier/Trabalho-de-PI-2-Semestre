@@ -211,13 +211,77 @@ public class ClassAdministrador extends ClassIndividuo implements InterGerenciar
     }
 
     @Override
-    public void ExcluirProduto(int Id, String nomeComerciante) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void ExcluirProduto(int Id) {
+        try{
+            GenericDAO gDao = new GenericDAO();
+            Connection conn = gDao.getConnection();
+
+            String sql = "DELETE FROM Produto WHERE ID = ?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, Id);
+            
+            ps.execute();
+            ps.close();
+
+            conn.close();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ClassComerciante.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(ClassComerciante.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }
 
     @Override
-    public void OffSaleProduto(int Id, String nomeComerciante) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void OffSaleProduto(int Id) {
+        try {
+            GenericDAO gDao = new GenericDAO();
+            Connection conn = gDao.getConnection();
+            
+            String sql = "UPDATE Produto SET Estado_Produto = 0 WHERE ID = ?";
+            
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, Id);
+            
+            ps.execute();
+            ps.close();
+            
+            conn.close();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ClassAdministrador.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(ClassAdministrador.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
+
+    @Override
+    public String definirNome(int idSessao) {
+        try {
+            GenericDAO gDao = new GenericDAO();
+            Connection conn = gDao.getConnection();
+            String retornoNome = "SELECT " +
+                    "SUBSTRING(Email, 1, CHARINDEX('@', Email) - 1) AS Email_Nome " +
+                    "FROM Individuo AS indi";
+            PreparedStatement psRetornaNome = conn.prepareStatement(retornoNome);
+            psRetornaNome.setInt(1, idSessao);
+            
+            ResultSet rs = psRetornaNome.executeQuery();
+            
+            if (rs.next()) {
+                String nome = rs.getString("Email_Nome");
+                return nome;
+            }
+            
+            rs.close();
+            psRetornaNome.close();
+            
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ClassComerciante.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(ClassComerciante.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
+        return "Não Achado";
     }
 
 }

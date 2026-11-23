@@ -201,7 +201,10 @@ public class CadastroComerciante extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+        LoginComerciante tela = new LoginComerciante();
+                
+        tela.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed

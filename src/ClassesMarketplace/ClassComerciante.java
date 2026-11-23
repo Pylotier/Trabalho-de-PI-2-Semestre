@@ -1,13 +1,14 @@
 package ClassesMarketplace;
 
 import DAO.GenericDAO;
+import Interfaces.InterAcesso;
 import Interfaces.InterGerenciarProduto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ClassComerciante extends ClassIndividuo implements InterGerenciarProduto{
+public class ClassComerciante extends ClassIndividuo implements InterGerenciarProduto, InterAcesso{
     private int individuoID_Registro;
     private String CNPJ;
     private String telefone;
@@ -96,7 +97,7 @@ public class ClassComerciante extends ClassIndividuo implements InterGerenciarPr
 
     @Override
     public void encerrarSecao() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.individuoID_Registro = 0;
     }
     
 
@@ -112,18 +113,92 @@ public class ClassComerciante extends ClassIndividuo implements InterGerenciarPr
     }
 
     @Override
-    public void ExcluirProduto(int Id, String nomeComerciante) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void ExcluirProduto(int Id) {
+        try{
+            GenericDAO gDao = new GenericDAO();
+            Connection conn = gDao.getConnection();
+
+            String sql = "DELETE FROM Produto WHERE ID = ?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, Id);
+            
+            ps.execute();
+            ps.close();
+
+            conn.close();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ClassComerciante.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(ClassComerciante.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }
 
     @Override
-    public void OffSaleProduto(int Id, String nomeComerciante) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void OffSaleProduto(int Id) {
+        try {
+            GenericDAO gDao = new GenericDAO();
+            Connection conn = gDao.getConnection();
+            
+            String sql = "UPDATE Produto SET Estado_Produto = 0 WHERE ID = ?";
+            
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, Id);
+            
+            ps.execute();
+            ps.close();
+            
+            conn.close();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ClassAdministrador.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(ClassAdministrador.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
+
+    @Override
+    public void AtualizarProtudo(ClassProduto cp, ClassEnderecoProduto cend, int id) {
+        try {
+            GenericDAO gDao = new GenericDAO();
+            Connection conn = gDao.getConnection();
+            
+            String sql = "UPDATE Produto SET "
+            + "Nome = ?, "
+            + "Preco = ?, "
+            + "Qtde = ?, "
+            + "Descricao = ?, "
+            + "CategoriaID = ?"
+            + "CEP = ?, "
+            + "Logradouro = ?, "
+            + "Numero = ?, "
+            + "Complemento = ? "
+            + "WHERE ID = ?";
+            
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, cp.getNomeProduto());
+            ps.setFloat(2, cp.getPreco());
+            ps.setInt(3, cp.getQtdeDisponivel());
+            ps.setString(4, cp.getDescricao());
+            ps.setString(5, cp.getNomeCategoria());
+            ps.setString(6, cend.getCEP());
+            ps.setString(7, cend.getLogradouro());
+            ps.setInt(8, cend.getNumero());
+            ps.setString(9, cend.getComplemento());
+            ps.setInt(10, id);
+            
+            ps.execute();
+            ps.close();
+            
+            conn.close();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ClassAdministrador.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(ClassAdministrador.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }
     
     public int insertUsuario(ClassComerciante cm) throws ClassNotFoundException, SQLException{
         GenericDAO gDao = new GenericDAO();
-        ClassCarrinho cr = new ClassCarrinho();
         Connection conn = gDao.getConnection();
         
         // INSERT em individuo
@@ -154,9 +229,9 @@ public class ClassComerciante extends ClassIndividuo implements InterGerenciarPr
         String sqlCliente = "INSERT INTO Comerciante (IndividuoID_Registro, Nome, CNPJ, Telefone) VALUES (?,?,?,?)";
         PreparedStatement psComerciante = conn.prepareStatement(sqlCliente);
         psComerciante.setInt(1, cm.getIndividuoID_Registro());
-        psComerciante.setString(2, cm.getNomeComerciante());
-        psComerciante.setString(3, cm.getCNPJ());
-        psComerciante.setString(4, cm.getTelefone());
+        psComerciante.setString(2, getNomeComerciante());
+        psComerciante.setString(3, getCNPJ());
+        psComerciante.setString(4, getTelefone());
         psComerciante.execute();
         psComerciante.close();
         
@@ -167,9 +242,35 @@ public class ClassComerciante extends ClassIndividuo implements InterGerenciarPr
     }
 
     @Override
-    public void AtualizarProtudo(ClassProduto cp, ClassEnderecoProduto cend, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String definirNome(int idSessao) {
+        try {
+            GenericDAO gDao = new GenericDAO();
+            Connection conn = gDao.getConnection();
+            String retornoNome = "SELECT " +
+                    "SUBSTRING(Email, 1, CHARINDEX('@', Email) - 1) AS Email_Nome " +
+                    "FROM Individuo AS indi";
+            PreparedStatement psRetornaNome = conn.prepareStatement(retornoNome);
+            psRetornaNome.setInt(1, idSessao);
+            
+            ResultSet rs = psRetornaNome.executeQuery();
+            
+            if (rs.next()) {
+                String nome = rs.getString("Email_Nome");
+                return nome;
+            }
+            
+            rs.close();
+            psRetornaNome.close();
+            
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ClassComerciante.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(ClassComerciante.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
+        return "Não Achado";
     }
+
 
 }   
    

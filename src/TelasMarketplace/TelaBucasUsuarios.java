@@ -37,8 +37,6 @@ public class TelaBucasUsuarios extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBuscaUsuario = new javax.swing.JTable();
         btnOffSaleProduto = new javax.swing.JButton();
-        labelUsuario = new javax.swing.JLabel();
-        btnLogout = new javax.swing.JButton();
         btnBuscarCategoria2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,11 +78,6 @@ public class TelaBucasUsuarios extends javax.swing.JFrame {
         btnOffSaleProduto.setText("Voltar a tela inícial");
         btnOffSaleProduto.addActionListener(this::btnOffSaleProdutoActionPerformed);
 
-        labelUsuario.setText("Nome Usuario");
-
-        btnLogout.setText("Logout");
-        btnLogout.addActionListener(this::btnLogoutActionPerformed);
-
         btnBuscarCategoria2.setText("Recarregar Tabela");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,11 +88,6 @@ public class TelaBucasUsuarios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(labelUsuario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLogout))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -117,15 +105,11 @@ public class TelaBucasUsuarios extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelUsuario)
-                    .addComponent(btnLogout))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBuscarComerciante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarCategoria1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -152,18 +136,11 @@ public class TelaBucasUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarComercianteActionPerformed
 
     private void btnOffSaleProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOffSaleProdutoActionPerformed
-        // TODO add your handling code here:
+        TelaAdministrador tela = new TelaAdministrador();
+                
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnOffSaleProdutoActionPerformed
-
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        String opc = JOptionPane.showInputDialog("Deseja encerrar a sessão? Y/N");
-        if (opc.equals("Y")){
-            ClassCliente cc = new ClassCliente();
-            cc.encerrarSecao();
-        }else if(!"N".equals(opc)){
-            JOptionPane.showMessageDialog(null, "Valor inválido");
-        }
-    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,11 +170,9 @@ public class TelaBucasUsuarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarCategoria1;
     private javax.swing.JButton btnBuscarCategoria2;
-    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnOffSaleProduto;
     private javax.swing.JButton btnVerProduto;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labelUsuario;
     private javax.swing.JTable tblBuscaUsuario;
     private javax.swing.JTextField txtBuscarComerciante;
     // End of variables declaration//GEN-END:variables

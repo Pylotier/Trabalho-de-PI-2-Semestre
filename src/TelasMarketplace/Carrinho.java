@@ -4,12 +4,17 @@
  */
 package TelasMarketplace;
 
+import ClassesMarketplace.ClassItemCarrinho;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Usuario
  */
 public class Carrinho extends javax.swing.JFrame {
-    
+    static int idSessao;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Carrinho.class.getName());
 
     /**
@@ -17,6 +22,11 @@ public class Carrinho extends javax.swing.JFrame {
      */
     public Carrinho() {
         initComponents();
+    }
+    
+    public Carrinho(int idSessao) {
+        initComponents();
+        this.idSessao = idSessao;
     }
 
     /**
@@ -36,6 +46,7 @@ public class Carrinho extends javax.swing.JFrame {
         btnAdicionar = new javax.swing.JButton();
         btnVerProduto = new javax.swing.JButton();
         btnReduzir = new javax.swing.JButton();
+        btnCarregarLista = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +83,7 @@ public class Carrinho extends javax.swing.JFrame {
 
         btnFinalizar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnFinalizar.setText("Finalizar");
+        btnFinalizar.addActionListener(this::btnFinalizarActionPerformed);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Valor total:");
@@ -87,6 +99,9 @@ public class Carrinho extends javax.swing.JFrame {
 
         btnReduzir.setText("Reduzir produto selecionado");
         btnReduzir.addActionListener(this::btnReduzirActionPerformed);
+
+        btnCarregarLista.setText("Carregar Lista");
+        btnCarregarLista.addActionListener(this::btnCarregarListaActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,17 +123,23 @@ public class Carrinho extends javax.swing.JFrame {
                         .addGap(29, 29, 29))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAdicionar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(123, 123, 123)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelValorTotal)
-                        .addGap(105, 105, 105))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCarregarLista)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCarregarLista)
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(labelValorTotal)
@@ -147,6 +168,16 @@ public class Carrinho extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnReduzirActionPerformed
 
+    private void btnCarregarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarListaActionPerformed
+        listarTabela();
+    }//GEN-LAST:event_btnCarregarListaActionPerformed
+
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
+        Pagamento tela = new Pagamento(idSessao);
+        
+        tela.setVisible(true);
+    }//GEN-LAST:event_btnFinalizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -171,9 +202,35 @@ public class Carrinho extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Carrinho().setVisible(true));
     }
+    
+    private void listarTabela() {
+        try {
+            ClassItemCarrinho ctc = new ClassItemCarrinho();
+            List<ClassItemCarrinho> lista = ctc.findAllProduto(idSessao);
+            DefaultTableModel model = 
+                    (DefaultTableModel)tblProdutoCarrinho.getModel();
+            model.setRowCount(0);
+            for (ClassItemCarrinho ctcLista : lista) {
+                Object[] linha = new Object[4];
+                linha[0] = ctcLista.getNomeProduto();
+                linha[1] = ctcLista.getPreco();
+                linha[2] = ctcLista.getCategoria();
+                linha[3] = ctcLista.getQtde();
+                model.addRow(linha);
+            }
+        } catch(Exception e) {
+            String exception = e.getMessage();
+            JOptionPane.showMessageDialog(null,
+                    exception,
+                    "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnCarregarLista;
     private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnReduzir;
     private javax.swing.JButton btnVerProduto;

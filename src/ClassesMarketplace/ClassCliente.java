@@ -1,12 +1,13 @@
 package ClassesMarketplace;
 
 import DAO.GenericDAO;
+import Interfaces.InterAcesso;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ClassCliente extends ClassIndividuo{
+public class ClassCliente extends ClassIndividuo implements InterAcesso{
     private String CPF;
     
     private int individuo_Registro;
@@ -116,6 +117,36 @@ public class ClassCliente extends ClassIndividuo{
 
     @Override
     public void encerrarSecao() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.individuo_Registro = 0;
+    }
+
+    @Override
+    public String definirNome(int idSessao) {
+        try {
+            GenericDAO gDao = new GenericDAO();
+            Connection conn = gDao.getConnection();
+            String retornoNome = "SELECT " +
+                    "SUBSTRING(Email, 1, CHARINDEX('@', Email) - 1) AS Email_Nome " +
+                    "FROM Individuo AS indi";
+            PreparedStatement psRetornaNome = conn.prepareStatement(retornoNome);
+            psRetornaNome.setInt(1, idSessao);
+            
+            ResultSet rs = psRetornaNome.executeQuery();
+            
+            if (rs.next()) {
+                String nome = rs.getString("Email_Nome");
+                return nome;
+            }
+            
+            rs.close();
+            psRetornaNome.close();
+            
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ClassComerciante.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(ClassComerciante.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
+        return "Não Achado";
     }
 }

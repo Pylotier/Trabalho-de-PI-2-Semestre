@@ -123,7 +123,7 @@ public class LoginAdministrador extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
                 System.out.print("id usuario:" + id);
                 
-                TelaAdministrador tela = new TelaAdministrador();
+                TelaAdministrador tela = new TelaAdministrador(id);
                 
                 tela.setVisible(true);
                 this.dispose();
@@ -144,7 +144,10 @@ public class LoginAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
-        // TODO add your handling code here:
+        CadastroAdministrador tela = new CadastroAdministrador();
+                
+        tela.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed

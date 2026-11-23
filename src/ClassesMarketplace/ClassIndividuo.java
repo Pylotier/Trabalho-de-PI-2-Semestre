@@ -1,12 +1,6 @@
 package ClassesMarketplace;
 
-import DAO.GenericDAO;
 import Interfaces.InterAcesso;
-import Interfaces.InterCadastroUsuario;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public abstract class ClassIndividuo implements InterAcesso{
     private int ID_Registro;

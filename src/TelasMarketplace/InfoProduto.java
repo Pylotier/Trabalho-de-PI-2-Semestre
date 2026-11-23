@@ -4,19 +4,33 @@
  */
 package TelasMarketplace;
 
+import ClassesMarketplace.ClassItemCarrinho;
+import ClassesMarketplace.ClassProduto;
+import DAO.GenericDAO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author Usuario
  */
 public class InfoProduto extends javax.swing.JFrame {
-    
+    static int idProduto, idSessao;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InfoProduto.class.getName());
-
+    
+    private ClassProduto produto;
     /**
      * Creates new form InfoProduto
      */
     public InfoProduto() {
         initComponents();
+    }
+    public InfoProduto(int id, int idSessao) {
+    initComponents();
+    this.idProduto = id;
+    this.idSessao = idSessao;
     }
 
     /**
@@ -30,64 +44,75 @@ public class InfoProduto extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        labelQtde = new javax.swing.JLabel();
+        lLabel111 = new javax.swing.JLabel();
         labelNomeProduto = new javax.swing.JLabel();
         labelPreco = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        labelQtde = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtaDescricao = new javax.swing.JTextArea();
-        btnSelecionarProduto = new javax.swing.JButton();
+        btnCarregarProduto = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        labelComerciante = new javax.swing.JLabel();
+        labelCategoria = new javax.swing.JLabel();
         btnSelecionarProduto1 = new javax.swing.JButton();
+        btnColocarCarrinho = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Nome do Produto:");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Preço:");
 
-        labelQtde.setText("Quantidade Disponível:");
+        lLabel111.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lLabel111.setText("Quantidade Disponível:");
 
         labelNomeProduto.setText("PRODUTO X");
 
         labelPreco.setText("PREÇO X");
 
-        jLabel11.setText("X");
+        labelQtde.setText("X");
 
         txtaDescricao.setEditable(false);
         txtaDescricao.setColumns(20);
         txtaDescricao.setRows(5);
         jScrollPane1.setViewportView(txtaDescricao);
 
-        btnSelecionarProduto.setText("Colocar no Carrinho");
-        btnSelecionarProduto.addActionListener(this::btnSelecionarProdutoActionPerformed);
+        btnCarregarProduto.setText("Carregar produto");
+        btnCarregarProduto.addActionListener(this::btnCarregarProdutoActionPerformed);
 
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setText("Descrição:");
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(this::btnVoltarActionPerformed);
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Categoria:");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Comerciante:");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Avaliação:");
 
         jLabel7.setText("X");
 
-        jLabel8.setText("X");
+        labelComerciante.setText("X");
 
-        jLabel12.setText("X");
+        labelCategoria.setText("X");
 
         btnSelecionarProduto1.setText("Avaliar");
         btnSelecionarProduto1.addActionListener(this::btnSelecionarProduto1ActionPerformed);
+
+        btnColocarCarrinho.setText("Colocar no Carrinho");
+        btnColocarCarrinho.addActionListener(this::btnColocarCarrinhoActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,101 +120,116 @@ public class InfoProduto extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(191, 191, 191))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSelecionarProduto)
-                                .addGap(30, 30, 30)
-                                .addComponent(btnSelecionarProduto1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelQtde)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lLabel111)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(labelQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(labelPreco)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel11)
-                                .addGap(130, 130, 130)
+                                        .addComponent(labelPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(58, 58, 58)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel7))
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel8))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(labelComerciante, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel15)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labelNomeProduto)
-                                .addGap(96, 96, 96)
+                                .addComponent(labelNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel12)))
-                        .addContainerGap())))
+                                .addComponent(labelCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap(7, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCarregarProduto))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(btnColocarCarrinho)
+                .addGap(30, 30, 30)
+                .addComponent(btnSelecionarProduto1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(12, 12, 12)
+                .addComponent(btnCarregarProduto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(labelNomeProduto)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel12))
+                    .addComponent(labelCategoria))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(labelPreco)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel8))
+                    .addComponent(labelComerciante))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lLabel111)
                     .addComponent(labelQtde)
-                    .addComponent(jLabel11)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSelecionarProduto)
                     .addComponent(btnVoltar)
-                    .addComponent(btnSelecionarProduto1))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(btnSelecionarProduto1)
+                    .addComponent(btnColocarCarrinho))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSelecionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSelecionarProdutoActionPerformed
-
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVoltarActionPerformed
+    private void btnCarregarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarProdutoActionPerformed
+        mostraProduto(idProduto);
+    }//GEN-LAST:event_btnCarregarProdutoActionPerformed
 
     private void btnSelecionarProduto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarProduto1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSelecionarProduto1ActionPerformed
 
-    /**
+    private void btnColocarCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColocarCarrinhoActionPerformed
+        ClassItemCarrinho cic = new ClassItemCarrinho();
+        try {
+            cic.AdicionarAoCarrinho(cic, idSessao, idProduto);
+        } catch (SQLException ex) {
+            System.getLogger(InfoProduto.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(InfoProduto.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
+    }//GEN-LAST:event_btnColocarCarrinhoActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    /** btnColocarCarrinho 
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -213,22 +253,107 @@ public class InfoProduto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new InfoProduto().setVisible(true));
     }
+    
+    public void mostraProduto(int id){
+        try {
+            GenericDAO gDao = new GenericDAO();
+            Connection conn = gDao.getConnection();
+            String retornoValores = "SELECT prod.Nome AS Nome, prod.Preco AS Preco, " +
+                    "prod.Qtde_Disponivel AS Qtde, " +
+                    "prod.Descricao AS Descricao, " +
+                    "cat.Nome AS Categoria, " +
+                    "com.Nome AS Comerciante " +
+                    "FROM Produto AS prod " +
+                    "INNER JOIN Categoria AS cat " +
+                    "ON cat.ID = prod.CategoriaID " +
+                    "INNER JOIN Comerciante AS com " +
+                    "ON com.IndividuoID_Registro = prod.ComercianteID";
+            PreparedStatement psRetornaValores = conn.prepareStatement(retornoValores);
+            
+            ResultSet rs = psRetornaValores.executeQuery();
+            
+            while (rs.next()) {
+                String nomeProduto = rs.getString("Nome");
+                String preco = String.valueOf(rs.getFloat("Preco"));
+                String Qtde = String.valueOf(rs.getInt("Qtde"));
+                String Descricao = rs.getString("Descricao");
+                String Categoria = rs.getString("Categoria");
+                String Comerciante = rs.getString("Comerciante");
+                
+                labelNomeProduto.setText(nomeProduto);
+                labelPreco.setText(preco);
+                labelQtde.setText(Qtde);
+                txtaDescricao.setText(Descricao);
+                labelCategoria.setText(Categoria);
+                labelComerciante.setText(Comerciante);
+            }
+            
+            
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(InfoProduto.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(InfoProduto.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
+    
+    public void colocarCarrinho(int id){
+        try {
+            GenericDAO gDao = new GenericDAO();
+            Connection conn = gDao.getConnection();
+            String retornoValores = "SELECT prod.Nome AS Nome, prod.Preco AS Preco, " +
+                    "prod.Qtde_Disponivel AS Qtde, " +
+                    "prod.Descricao AS Descricao, " +
+                    "cat.Nome AS Categoria, " +
+                    "com.Nome AS Comerciante " +
+                    "FROM Produto AS prod " +
+                    "INNER JOIN Categoria AS cat " +
+                    "ON cat.ID = prod.CategoriaID " +
+                    "INNER JOIN Comerciante AS com " +
+                    "ON com.IndividuoID_Registro = prod.ComercianteID";
+            PreparedStatement psRetornaValores = conn.prepareStatement(retornoValores);
+            
+            ResultSet rs = psRetornaValores.executeQuery();
+            
+            while (rs.next()) {
+                String nomeProduto = rs.getString("Nome");
+                String preco = String.valueOf(rs.getFloat("Preco"));
+                String Qtde = String.valueOf(rs.getInt("Qtde"));
+                String Descricao = rs.getString("Descricao");
+                String Categoria = rs.getString("Categoria");
+                String Comerciante = rs.getString("Comerciante");
+                
+                labelNomeProduto.setText(nomeProduto);
+                labelPreco.setText(preco);
+                labelQtde.setText(Qtde);
+                txtaDescricao.setText(Descricao);
+                labelCategoria.setText(Categoria);
+                labelComerciante.setText(Comerciante);
+            }
+            
+            
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(InfoProduto.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(InfoProduto.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSelecionarProduto;
+    private javax.swing.JButton btnCarregarProduto;
+    private javax.swing.JButton btnColocarCarrinho;
     private javax.swing.JButton btnSelecionarProduto1;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lLabel111;
+    private javax.swing.JLabel labelCategoria;
+    private javax.swing.JLabel labelComerciante;
     private javax.swing.JLabel labelNomeProduto;
     private javax.swing.JLabel labelPreco;
     private javax.swing.JLabel labelQtde;

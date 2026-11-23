@@ -4,15 +4,8 @@
  */
 package TelasMarketplace;
 
-import ClassesMarketplace.ClassCategoria;
+import ClassesMarketplace.ClassCliente;
 import ClassesMarketplace.ClassProduto;
-import ClassesMarketplace.ClassProduto;
-import DAO.GenericDAO;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,12 +15,19 @@ import javax.swing.table.DefaultTableModel;
  * @author dti
  */
 public class TelaInicial extends javax.swing.JFrame {
-
+    static int sessaoID;
     /**
      * Creates new form TelaInicial
      */
     public TelaInicial() {
         initComponents();
+    }
+    
+    public TelaInicial(int sessaoID) {
+        initComponents();
+        ClassCliente cli = new ClassCliente();
+        this.sessaoID = sessaoID;
+        labelUsuario.setText(cli.definirNome(sessaoID));
     }
 
     /**
@@ -65,14 +65,14 @@ public class TelaInicial extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Produto", "Preço", "Quantidade", "Categoria"
+                "ID Produto", "Produto", "Preço", "Quantidade", "Categoria"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -90,6 +90,7 @@ public class TelaInicial extends javax.swing.JFrame {
             tblPrincipal.getColumnModel().getColumn(1).setResizable(false);
             tblPrincipal.getColumnModel().getColumn(2).setResizable(false);
             tblPrincipal.getColumnModel().getColumn(3).setResizable(false);
+            tblPrincipal.getColumnModel().getColumn(4).setResizable(false);
         }
 
         labelUsuario.setText("Nome Usuario");
@@ -198,7 +199,7 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addComponent(btnHistorico)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCarrinho)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(35, 35, 35)
                         .addComponent(labelUsuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnLogout))
@@ -266,23 +267,58 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
+        ClassCliente cli = new ClassCliente();
+        int opcao = JOptionPane.showConfirmDialog(null,"Deseja realmente sair da sua conta?",
+            "Logoff",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (opcao == JOptionPane.YES_OPTION) {
+
+            // Encerra a sessão atual
+            cli.encerrarSecao();
+
+            // Retorna para a tela de login
+            LoginUsuario login = new LoginUsuario();
+
+            login.setVisible(true);
+
+            this.dispose();
+        }
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnCadastroComercianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroComercianteActionPerformed
-        // TODO add your handling code here:
+        CadastroComerciante tela = new CadastroComerciante();
+                
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCadastroComercianteActionPerformed
 
     private void btnCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarrinhoActionPerformed
-        // TODO add your handling code here:
+        Carrinho tela = new Carrinho(sessaoID);
+                
+        tela.setVisible(true);
     }//GEN-LAST:event_btnCarrinhoActionPerformed
 
     private void btnVerProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProdutoActionPerformed
-        // TODO add your handling code here:
+        int linha = tblPrincipal.getSelectedRow();
+        ClassProduto cp = new ClassProduto();
+        if (linha != -1){
+            int idProduto = Integer.parseInt(tblPrincipal.getValueAt(linha, 0).toString());
+            System.out.print(idProduto);
+            cp.setProdutoSelecionado(idProduto);
+            InfoProduto tela = new InfoProduto(idProduto, sessaoID);
+            tela.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Nenhum produto selecionada");
+        }
     }//GEN-LAST:event_btnVerProdutoActionPerformed
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
-        // TODO add your handling code here:
+        Historico tela = new Historico();
+                
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnHistoricoActionPerformed
 
     private void txtBuscarPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarPrecoActionPerformed

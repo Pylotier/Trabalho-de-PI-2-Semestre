@@ -4,18 +4,33 @@
  */
 package TelasMarketplace;
 
+import ClassesMarketplace.ClassAdministrador;
+import ClassesMarketplace.ClassCategoria;
+import ClassesMarketplace.ClassProduto;
+import ClassesMarketplace.ClassTabelaAdministrador;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Usuario
  */
 public class TelaAdministrador extends javax.swing.JFrame {
-    
+    static int idSessao;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaAdministrador.class.getName());
 
     /**
      * Creates new form TelaAdministrador
      */
     public TelaAdministrador() {
+        initComponents();
+        ClassAdministrador ca = new ClassAdministrador();
+        this.idSessao = idSessao;
+        labelUsuario.setText(ca.definirNome(idSessao));
+    }
+    
+    public TelaAdministrador(int idSessao) {
         initComponents();
     }
 
@@ -39,7 +54,6 @@ public class TelaAdministrador extends javax.swing.JFrame {
         btnExcluirProduto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAdministrador = new javax.swing.JTable();
-        btnPromocaoProduto = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         labelUsuario = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -47,9 +61,10 @@ public class TelaAdministrador extends javax.swing.JFrame {
         txtMaxPreco = new javax.swing.JTextField();
         btnBuscarCategoria1 = new javax.swing.JButton();
         btnOffSaleProduto = new javax.swing.JButton();
-        btnBuscarCategoria2 = new javax.swing.JButton();
+        btnCarregarLista = new javax.swing.JButton();
         btnNovaCategoria = new javax.swing.JButton();
         btnAtualizarProduto = new javax.swing.JButton();
+        btnVerSolicitacao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(518, 0));
@@ -105,9 +120,6 @@ public class TelaAdministrador extends javax.swing.JFrame {
         tblAdministrador.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblAdministrador);
 
-        btnPromocaoProduto.setText("Aplicar Promoção");
-        btnPromocaoProduto.addActionListener(this::btnPromocaoProdutoActionPerformed);
-
         jLabel5.setText("Min");
 
         labelUsuario.setText("Nome Usuario");
@@ -124,14 +136,17 @@ public class TelaAdministrador extends javax.swing.JFrame {
         btnOffSaleProduto.setText("Tirar do Marketplace");
         btnOffSaleProduto.addActionListener(this::btnOffSaleProdutoActionPerformed);
 
-        btnBuscarCategoria2.setText("Recarregar Tabela");
-        btnBuscarCategoria2.addActionListener(this::btnBuscarCategoria2ActionPerformed);
+        btnCarregarLista.setText("Recarregar Tabela");
+        btnCarregarLista.addActionListener(this::btnCarregarListaActionPerformed);
 
         btnNovaCategoria.setText("Nova Categoria");
         btnNovaCategoria.addActionListener(this::btnNovaCategoriaActionPerformed);
 
         btnAtualizarProduto.setText("Atualizar Produto");
         btnAtualizarProduto.addActionListener(this::btnAtualizarProdutoActionPerformed);
+
+        btnVerSolicitacao.setText("Ver Solicitações");
+        btnVerSolicitacao.addActionListener(this::btnVerSolicitacaoActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,32 +160,30 @@ public class TelaAdministrador extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnBuscarCategoria2)
+                                    .addComponent(btnCarregarLista)
                                     .addComponent(btnVerProduto))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(labelUsuario)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnLogout))
                                     .addComponent(btnOffSaleProduto, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(labelUsuario)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(btnLogout))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(btnRegistrarProduto)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btnExcluirProduto)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btnAtualizarProduto)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btnPromocaoProduto)
-                                            .addGap(13, 13, 13))))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(btnNovaCategoria)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnRegistrarProduto)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnExcluirProduto)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnAtualizarProduto)))))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBuscarCategoria1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnNovaCategoria))
+                                .addComponent(btnVerSolicitacao))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBuscarNome)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -189,7 +202,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
                                 .addComponent(btnBuscarCategoria)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtBuscarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 101, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +214,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscarCategoria1)
-                    .addComponent(btnNovaCategoria))
+                    .addComponent(btnVerSolicitacao))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBuscarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,23 +232,40 @@ public class TelaAdministrador extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscarCategoria2)
+                    .addComponent(btnCarregarLista)
                     .addComponent(btnRegistrarProduto)
                     .addComponent(btnAtualizarProduto)
                     .addComponent(btnExcluirProduto)
-                    .addComponent(btnPromocaoProduto))
+                    .addComponent(btnNovaCategoria))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOffSaleProduto)
                     .addComponent(btnVerProduto))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
+        ClassAdministrador ca = new ClassAdministrador();
+        int opcao = JOptionPane.showConfirmDialog(null,"Deseja realmente sair da sua conta?",
+            "Logoff",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (opcao == JOptionPane.YES_OPTION) {
+
+            // Encerra a sessão atual
+            ca.encerrarSecao();
+
+            // Retorna para a tela de login
+            LoginAdministrador login = new LoginAdministrador();
+
+            login.setVisible(true);
+
+            this.dispose();
+        }
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnBuscarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNomeActionPerformed
@@ -259,23 +289,42 @@ public class TelaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarNomeActionPerformed
 
     private void btnVerProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProdutoActionPerformed
-        // TODO add your handling code here:
+        int linha = tblAdministrador.getSelectedRow();
+        ClassProduto cp = new ClassProduto();
+        if (linha != -1){
+            int idProduto = Integer.parseInt(tblAdministrador.getValueAt(linha, 0).toString());
+            System.out.print(idProduto);
+            cp.setProdutoSelecionado(idProduto);
+            InfoProduto tela = new InfoProduto(idProduto, idSessao);
+            tela.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Nenhum produto selecionada");
+        }
+        
+                
+        
     }//GEN-LAST:event_btnVerProdutoActionPerformed
 
     private void btnRegistrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarProdutoActionPerformed
         CadastrarProduto tela = new CadastrarProduto();
                 
         tela.setVisible(true);
-
     }//GEN-LAST:event_btnRegistrarProdutoActionPerformed
 
     private void btnExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirProdutoActionPerformed
-        // TODO add your handling code here:
+        
+        int linha = tblAdministrador.getSelectedRow();
+        
+        ClassAdministrador ca = new ClassAdministrador();
+        
+        if (linha != -1){
+            int idProduto = Integer.parseInt(tblAdministrador.getValueAt(linha, 0).toString());
+            ca.ExcluirProduto(idProduto);
+        }else{
+            JOptionPane.showMessageDialog(null, "Nenhuma linha selecionada");
+        }
+        
     }//GEN-LAST:event_btnExcluirProdutoActionPerformed
-
-    private void btnPromocaoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromocaoProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPromocaoProdutoActionPerformed
 
     private void txtMinPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMinPrecoActionPerformed
         // TODO add your handling code here:
@@ -293,12 +342,23 @@ public class TelaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarCategoria1ActionPerformed
 
     private void btnOffSaleProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOffSaleProdutoActionPerformed
-        // TODO add your handling code here:
+        
+        int linha = tblAdministrador.getSelectedRow();
+        
+        ClassAdministrador ca = new ClassAdministrador();
+        
+        if (linha != -1){
+            int idProduto = Integer.parseInt(tblAdministrador.getValueAt(linha, 0).toString());
+            ca.OffSaleProduto(idProduto);
+        }else{
+            JOptionPane.showMessageDialog(null, "Nenhuma linha selecionada");
+        }
+
     }//GEN-LAST:event_btnOffSaleProdutoActionPerformed
 
-    private void btnBuscarCategoria2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCategoria2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarCategoria2ActionPerformed
+    private void btnCarregarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarListaActionPerformed
+        listarTabela();
+    }//GEN-LAST:event_btnCarregarListaActionPerformed
 
     private void btnNovaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovaCategoriaActionPerformed
         CadastrarCategoria tela = new CadastrarCategoria();
@@ -308,8 +368,15 @@ public class TelaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovaCategoriaActionPerformed
 
     private void btnAtualizarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarProdutoActionPerformed
-        // TODO add your handling code here:
+        AtualizarProduto tela = new AtualizarProduto();
+                
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAtualizarProdutoActionPerformed
+
+    private void btnVerSolicitacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerSolicitacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerSolicitacaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,21 +402,47 @@ public class TelaAdministrador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new TelaAdministrador().setVisible(true));
     }
+    
+    private void listarTabela() {
+        try {
+            ClassTabelaAdministrador cta = new ClassTabelaAdministrador();
+            List<ClassTabelaAdministrador> lista = cta.findAllProduto();
+            DefaultTableModel model = 
+                    (DefaultTableModel)tblAdministrador.getModel();
+            model.setRowCount(0);
+            for (ClassTabelaAdministrador ctaLista : lista) {
+                Object[] linha = new Object[6];
+                linha[0] = ctaLista.getID_Produto();
+                linha[1] = ctaLista.getNomeProduto();
+                linha[2] = ctaLista.getPreco();
+                linha[3] = ctaLista.getNomeCategoria();
+                linha[4] = ctaLista.getNomeComerciante();
+                linha[5] = ctaLista.getID_Comerciante();
+                model.addRow(linha);
+            }
+        } catch(Exception e) {
+            String exception = e.getMessage();
+            JOptionPane.showMessageDialog(null,
+                    exception,
+                    "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizarProduto;
     private javax.swing.JButton btnBuscarCategoria;
     private javax.swing.JButton btnBuscarCategoria1;
-    private javax.swing.JButton btnBuscarCategoria2;
     private javax.swing.JButton btnBuscarNome;
     private javax.swing.JButton btnBuscarPreco;
+    private javax.swing.JButton btnCarregarLista;
     private javax.swing.JButton btnExcluirProduto;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnNovaCategoria;
     private javax.swing.JButton btnOffSaleProduto;
-    private javax.swing.JButton btnPromocaoProduto;
     private javax.swing.JButton btnRegistrarProduto;
     private javax.swing.JButton btnVerProduto;
+    private javax.swing.JButton btnVerSolicitacao;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;

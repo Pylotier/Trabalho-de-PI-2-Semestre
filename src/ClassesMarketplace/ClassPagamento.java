@@ -1,5 +1,10 @@
 package ClassesMarketplace;
 
+import DAO.GenericDAO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 public class ClassPagamento {
     private int ID_Pagamento;
     private String metodoPagamento;
@@ -25,4 +30,7 @@ public class ClassPagamento {
         this.metodoPagamento = metodoPagamento;
     }
     
+    public void finalizarPagamento(int idSessao){
+        
+    }
 }

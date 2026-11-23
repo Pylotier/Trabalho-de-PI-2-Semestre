@@ -191,9 +191,6 @@ public class CadastrarCategoria extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarCategoriaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        TelaAdministrador tela = new TelaAdministrador();
-                
-        tela.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 

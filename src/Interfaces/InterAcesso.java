@@ -5,4 +5,5 @@ public interface InterAcesso {
     public void logOff();
     public void iniciarSessao(int id);
     public void encerrarSecao();
+    public String definirNome(int idSessao);
 }

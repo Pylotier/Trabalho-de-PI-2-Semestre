@@ -4,12 +4,14 @@
  */
 package TelasMarketplace;
 
+import ClassesMarketplace.ClassPagamento;
+
 /**
  *
  * @author Usuario
  */
 public class Pagamento extends javax.swing.JFrame {
-    
+    static int idSessao;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Pagamento.class.getName());
 
     /**
@@ -17,6 +19,11 @@ public class Pagamento extends javax.swing.JFrame {
      */
     public Pagamento() {
         initComponents();
+    }
+    
+    public Pagamento(int idSessao) {
+        initComponents();
+        this.idSessao = idSessao;
     }
 
     /**
@@ -29,10 +36,10 @@ public class Pagamento extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        txtSenha = new javax.swing.JTextField();
+        txtCEP = new javax.swing.JTextField();
+        txtLogradouro = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtSenha1 = new javax.swing.JTextField();
+        txtNumero = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         comboxTipoPagamento = new javax.swing.JComboBox<>();
@@ -40,15 +47,15 @@ public class Pagamento extends javax.swing.JFrame {
         labelValorTotal = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnFinalizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtAreaComplemento = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("CEP:");
 
-        txtEmail.addActionListener(this::txtEmailActionPerformed);
+        txtCEP.addActionListener(this::txtCEPActionPerformed);
 
         jLabel4.setText("Logradouro:");
 
@@ -57,6 +64,7 @@ public class Pagamento extends javax.swing.JFrame {
         jLabel6.setText("Complemento:");
 
         comboxTipoPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Débito", "Crédito", "PIX" }));
+        comboxTipoPagamento.addActionListener(this::comboxTipoPagamentoActionPerformed);
 
         jLabel2.setText("Tipo de Pagamento");
 
@@ -68,12 +76,12 @@ public class Pagamento extends javax.swing.JFrame {
 
         jButton1.setText("Voltar");
 
-        jButton2.setText("Finalizar");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        btnFinalizar.setText("Finalizar");
+        btnFinalizar.addActionListener(this::btnFinalizarActionPerformed);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtAreaComplemento.setColumns(20);
+        txtAreaComplemento.setRows(5);
+        jScrollPane1.setViewportView(txtAreaComplemento);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,22 +103,22 @@ public class Pagamento extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel5)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtSenha1))
+                            .addComponent(txtNumero))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel4)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(btnFinalizar)))
                 .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
@@ -119,15 +127,15 @@ public class Pagamento extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtSenha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -143,20 +151,32 @@ public class Pagamento extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnFinalizar))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+    private void txtCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCEPActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
+    }//GEN-LAST:event_txtCEPActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
+        ClassPagamento pag = new ClassPagamento();
+        
+        String CEP = txtCEP.getText();
+        String logradouro = txtLogradouro.getText();
+        int numero = Integer.parseInt(txtNumero.getText());
+        String comeplemento = txtAreaComplemento.getText();
+        String tipoPagemento = comboxTipoPagamento.getSelectedItem().toString();
+        
+        pag.finalizarPagamento(idSessao);
+    }//GEN-LAST:event_btnFinalizarActionPerformed
+
+    private void comboxTipoPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxTipoPagamentoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_comboxTipoPagamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,9 +204,9 @@ public class Pagamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFinalizar;
     private javax.swing.JComboBox<String> comboxTipoPagamento;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -194,10 +214,10 @@ public class Pagamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel labelValorTotal;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtSenha;
-    private javax.swing.JTextField txtSenha1;
+    private javax.swing.JTextArea txtAreaComplemento;
+    private javax.swing.JTextField txtCEP;
+    private javax.swing.JTextField txtLogradouro;
+    private javax.swing.JTextField txtNumero;
     // End of variables declaration//GEN-END:variables
 }

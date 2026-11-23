@@ -4,8 +4,7 @@
  */
 package TelasMarketplace;
 
-import ClassesMarketplace.ClassAdministrador;
-import ClassesMarketplace.ClassCarrinho;
+import ClassesMarketplace.ClassComerciante;
 import ClassesMarketplace.ClassEnderecoProduto;
 import ClassesMarketplace.ClassProduto;
 import DAO.GenericDAO;
@@ -249,7 +248,7 @@ public class AtualizarProduto extends javax.swing.JFrame {
         try {
             ClassProduto cp = new ClassProduto();
             ClassEnderecoProduto cend = new ClassEnderecoProduto();
-            ClassAdministrador ca = new ClassAdministrador();
+            ClassComerciante com = new ClassComerciante();
 
             cend.setCEP(txtCEP.getText());
             cend.setLogradouro(txtLogradouro.getText());
@@ -265,7 +264,7 @@ public class AtualizarProduto extends javax.swing.JFrame {
             
             int id  = Integer.parseInt(txtIDProduto.getText());
 
-            ca.AtualizarProtudo(cp, cend, id);
+            com.AtualizarProtudo(cp, cend, id);
 
             JOptionPane.showMessageDialog(
                 null,

@@ -42,13 +42,12 @@ public class BloquearComercinate extends javax.swing.JFrame {
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(this::btnVoltarActionPerformed);
 
-        jLabel8.setText("Nome comerciante:");
+        jLabel8.setText("Comerciante Selecionado:");
 
         labelDescricao.setText("XXX");
 
         jLabel4.setText("Descrição:");
 
-        tblDescricao.setEditable(false);
         tblDescricao.setColumns(20);
         tblDescricao.setRows(5);
         jScrollPane1.setViewportView(tblDescricao);
@@ -79,16 +78,16 @@ public class BloquearComercinate extends javax.swing.JFrame {
                             .addComponent(btnAceitar1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnVoltar))))
-                .addGap(18, 152, Short.MAX_VALUE))
+                .addGap(18, 33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(labelNomeComerciante))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(labelDescricao))
@@ -98,7 +97,7 @@ public class BloquearComercinate extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar)
                     .addComponent(btnAceitar1))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();

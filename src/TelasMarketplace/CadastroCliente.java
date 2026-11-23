@@ -168,7 +168,10 @@ public class CadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+        LoginUsuario tela = new LoginUsuario();
+                
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**

@@ -45,19 +45,19 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="18" pref="152" max="32767" attributes="0"/>
+              <EmptySpace min="18" pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="labelNomeComerciante" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="labelDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -69,7 +69,7 @@
                   <Component id="btnVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAceitar1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="95" max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,7 +85,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nome comerciante:"/>
+        <Property name="text" type="java.lang.String" value="Comerciante Selecionado:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelDescricao">
@@ -107,7 +107,6 @@
       <SubComponents>
         <Component class="javax.swing.JTextArea" name="tblDescricao">
           <Properties>
-            <Property name="editable" type="boolean" value="false"/>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
           </Properties>
