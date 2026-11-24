@@ -60,6 +60,7 @@ public class TelaComerciante extends javax.swing.JFrame {
         btnCarregarLista = new javax.swing.JButton();
         btnAtualizarProduto = new javax.swing.JButton();
         btnSolicitacao = new javax.swing.JButton();
+        btnPromocaoProduto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -211,6 +212,13 @@ public class TelaComerciante extends javax.swing.JFrame {
             }
         });
 
+        btnPromocaoProduto.setText("Aplicar Promoção");
+        btnPromocaoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromocaoProdutoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -218,7 +226,7 @@ public class TelaComerciante extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCarregarLista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -229,7 +237,9 @@ public class TelaComerciante extends javax.swing.JFrame {
                         .addComponent(btnAtualizarProduto))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnVerProduto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
+                        .addComponent(btnPromocaoProduto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnOffSaleProduto))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,7 +310,8 @@ public class TelaComerciante extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVerProduto)
-                    .addComponent(btnOffSaleProduto))
+                    .addComponent(btnOffSaleProduto)
+                    .addComponent(btnPromocaoProduto))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -415,6 +426,10 @@ public class TelaComerciante extends javax.swing.JFrame {
         tela.setVisible(true);
     }//GEN-LAST:event_btnSolicitacaoActionPerformed
 
+    private void btnPromocaoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromocaoProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPromocaoProdutoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -485,6 +500,7 @@ public class TelaComerciante extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluirProduto;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnOffSaleProduto;
+    private javax.swing.JButton btnPromocaoProduto;
     private javax.swing.JButton btnRegistrarProduto;
     private javax.swing.JButton btnSolicitacao;
     private javax.swing.JButton btnVerMarketplace;

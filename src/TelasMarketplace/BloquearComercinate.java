@@ -30,7 +30,6 @@ public class BloquearComercinate extends javax.swing.JFrame {
 
         btnVoltar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        labelDescricao = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDescricao = new javax.swing.JTextArea();
@@ -43,8 +42,6 @@ public class BloquearComercinate extends javax.swing.JFrame {
         btnVoltar.addActionListener(this::btnVoltarActionPerformed);
 
         jLabel8.setText("Comerciante Selecionado:");
-
-        labelDescricao.setText("XXX");
 
         jLabel4.setText("Descrição:");
 
@@ -69,10 +66,7 @@ public class BloquearComercinate extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelNomeComerciante))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(labelDescricao))
+                        .addComponent(jLabel4)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(btnAceitar1)
@@ -88,9 +82,7 @@ public class BloquearComercinate extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(labelNomeComerciante))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(labelDescricao))
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
@@ -142,7 +134,6 @@ public class BloquearComercinate extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labelDescricao;
     private javax.swing.JLabel labelNomeComerciante;
     private javax.swing.JTextArea tblDescricao;
     // End of variables declaration//GEN-END:variables

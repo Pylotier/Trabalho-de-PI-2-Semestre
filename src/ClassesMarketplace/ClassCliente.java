@@ -125,9 +125,10 @@ public class ClassCliente extends ClassIndividuo implements InterAcesso{
         try {
             GenericDAO gDao = new GenericDAO();
             Connection conn = gDao.getConnection();
-            String retornoNome = "SELECT " +
-                    "SUBSTRING(Email, 1, CHARINDEX('@', Email) - 1) AS Email_Nome " +
-                    "FROM Individuo AS indi";
+            String retornoNome = "SELECT SUBSTRING(indi.Email, 1, CHARINDEX('@', Email) - 1) "  + 
+                "AS Email_Nome " +
+                "FROM Individuo AS indi " +
+                "WHERE indi.ID_Registro = ?";
             PreparedStatement psRetornaNome = conn.prepareStatement(retornoNome);
             psRetornaNome.setInt(1, idSessao);
             

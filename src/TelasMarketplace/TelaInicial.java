@@ -28,6 +28,7 @@ public class TelaInicial extends javax.swing.JFrame {
         ClassCliente cli = new ClassCliente();
         this.sessaoID = sessaoID;
         labelUsuario.setText(cli.definirNome(sessaoID));
+        
     }
 
     /**

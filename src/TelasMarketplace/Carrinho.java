@@ -123,7 +123,7 @@ public class Carrinho extends javax.swing.JFrame {
                         .addGap(29, 29, 29))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAdicionar)
-                        .addGap(123, 123, 123)
+                        .addGap(156, 156, 156)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelValorTotal)

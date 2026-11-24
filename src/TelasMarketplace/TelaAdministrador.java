@@ -24,13 +24,14 @@ public class TelaAdministrador extends javax.swing.JFrame {
      */
     public TelaAdministrador() {
         initComponents();
-        ClassAdministrador ca = new ClassAdministrador();
-        this.idSessao = idSessao;
-        labelUsuario.setText(ca.definirNome(idSessao));
+        
     }
     
     public TelaAdministrador(int idSessao) {
         initComponents();
+        ClassAdministrador ca = new ClassAdministrador();
+        this.idSessao = idSessao;
+        labelUsuario.setText(ca.definirNome(idSessao));
     }
 
     /**
